@@ -1,0 +1,24 @@
+1.Create Task Form:
+
+Allow users to input new tasks.
+Implement functionality to add tasks to the list.
+
+2.Display Task List:
+
+Show the list of tasks with their respective details (name, status, priority).
+Ensure tasks are organized and easy to read.
+
+3.Toggle Task Status:
+
+Allow users to mark tasks as completed or incomplete.
+Implement functionality to toggle the status of tasks.
+
+4.Edit Task Name:
+
+Provide the option to edit the name of existing tasks.
+Implement functionality to update task names.
+
+5.Delete Task:
+
+Allow users to delete tasks they no longer need.
+Implement functionality to remove tasks from the list.
