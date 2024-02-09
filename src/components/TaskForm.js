@@ -2,18 +2,13 @@ import React, { useState } from 'react';
 
 const TaskForm = ({ onAddTask }) => {
   const [taskName, setTaskName] = useState('');
+  const [priority, setPriority] = useState('Low');
 
-  // Function to handle task name input change
-  const handleInputChange = (event) => {
-    setTaskName(event.target.value);
-  };
-
-  // Function to handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    if (!taskName.trim()) return; // Ignore empty task names
-    onAddTask({ name: taskName }); // Pass new task to parent component
-    setTaskName(''); // Clear input field after adding task
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!taskName.trim()) return;
+    onAddTask({ name: taskName, priority, completed: false });
+    setTaskName('');
   };
 
   return (
@@ -21,11 +16,24 @@ const TaskForm = ({ onAddTask }) => {
       <input
         type="text"
         value={taskName}
-        onChange={handleInputChange}
+        onChange={(e) => setTaskName(e.target.value)}
         className="w-full mb-2 px-3 py-2 border rounded"
-        placeholder="Enter task name"
+        placeholder="Task Name"
+        required
       />
-      <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Add Task</button>
+      <select
+        value={priority}
+        onChange={(e) => setPriority(e.target.value)}
+        className="w-full mb-2 px-3 py-2 border rounded"
+        required
+      >
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+      </select>
+      <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">
+        Add Task
+      </button>
     </form>
   );
 };
