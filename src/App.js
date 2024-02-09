@@ -11,27 +11,38 @@ const App = () => {
     setTasks([...tasks, newTask]);
   };
 
-  // Function to toggle task status
   const handleToggleTaskStatus = (taskId) => {
-    console.log("Toggling task status for task ID:", taskId);
     const updatedTasks = tasks.map((task) => {
       if (task.id === taskId) {
         return { ...task, completed: !task.completed };
       }
       return task;
     });
-    console.log("Updated tasks:", updatedTasks);
+    setTasks(updatedTasks);
+  };
+
+  const handleEditTaskName = (taskId, newName) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, name: newName };
+      }
+      return task;
+    });
     setTasks(updatedTasks);
   };
 
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Todo List</h1>
+    <div>
+      <h1>Todo List</h1>
       {/* Task Form component for adding new tasks */}
       <TaskForm onAddTask={handleAddTask} />
 
       {/* Display the list of tasks */}
-      <TaskList tasks={tasks} onToggleTaskStatus={handleToggleTaskStatus} />
+      <TaskList
+        tasks={tasks}
+        onToggleTaskStatus={handleToggleTaskStatus}
+        onEditTaskName={handleEditTaskName}
+      />
     </div>
   );
 };

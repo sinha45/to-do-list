@@ -1,9 +1,16 @@
 import React from 'react';
+import { useState } from 'react';
 
-const TaskList = ({ tasks, onToggleTaskStatus }) => {
-  // Function to handle toggling task status
-  const handleToggleStatus = (taskId) => {
-    onToggleTaskStatus(taskId);
+const TaskList = ({ tasks, onToggleTaskStatus, onEditTaskName }) => {
+    const [editedTaskName, setEditedTaskName] = useState('');
+  
+    // Function to handle toggling task status
+    const handleToggleStatus = (taskId) => {
+      onToggleTaskStatus(taskId);
+    };
+  const handleEditTaskName = (taskId, newName) => {
+    onEditTaskName(taskId, newName);
+    setEditedTaskName('');
   };
 
   return (
@@ -17,7 +24,13 @@ const TaskList = ({ tasks, onToggleTaskStatus }) => {
               checked={task.completed}
               onChange={() => handleToggleStatus(task.id)}
             />
-            <span>{task.name}</span>
+            <span
+              contentEditable={true}
+              suppressContentEditableWarning={true}
+              onBlur={(e) => handleEditTaskName(task.id, e.target.textContent)}
+            >
+              {task.name}
+            </span>
             <span>Status: {task.completed ? 'Completed' : 'Incomplete'}</span>
             <span>Priority: {task.priority}</span>
           </li>
